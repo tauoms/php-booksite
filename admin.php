@@ -10,7 +10,6 @@
 
     $json = file_get_contents("books.json");
     $books = json_decode($json, true);
-    $favorites = explode(",", $_COOKIE["favorites"]);
 
 ?>
 <!DOCTYPE html>
@@ -45,16 +44,10 @@
                     $publishing_year = $book["publishing_year"];
                     $description = $book["description"]; ?>
                     <section class="book">
-            <a class= 
-            <?php
-            if (in_array($id, $favorites)) {
-                ?>"bookmark fa fa-star"
-                <?php
-            } else {
-                ?>"bookmark fa fa-star-o"
-                <?php
-            }
-            ?> href=<?php print "setfavorite.php?id=$id"; ?>></a>
+                    <form class="deleteform" action="deletebook.php" method="post">
+                    <input type="hidden" name="bookid" value="<?php print $id; ?>">
+                    <input type="submit" name="deletebook" value="Delete">
+                    </form>
             <h3><?php print $title; ?></h3>
             <p class="publishing-info">
                 <span class="author"><?php print $author; ?></span>,
@@ -68,20 +61,7 @@
             <?php } 
             
             ?>
-            <section class="book">
-                <form class="deleteform" action="deletebook.php" method="post">
-                    <input type="hidden" name="bookid" value="1">
-                    <input type="submit" name="deletebook" value="Delete">
-                </form>
-                <h3>To Kill a Mockingbird</h3>
-                <p class="publishing-info">
-                    <span class="author">Harper Lee</span>,
-                    <span class="year">1960</span>
-                </p>
-                <p class="description">
-                    Harper Lee's masterpiece explores racial injustice and moral growth through the eyes of a young girl in the American South.
-                </p>
-            </section>
+            
         </main>
     </div>    
 </body>
