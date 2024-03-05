@@ -10,7 +10,7 @@
 
     // Check if the user is already logged in. If so, redirect to admin.php.
     if(isset($_SESSION["login"]) && $_SESSION["login"] == "OK") {
-        header("Location: login.php");
+        header("Location: admin.php");
         exit;
     }
 
@@ -24,7 +24,7 @@
             header("Location: admin.php");
             exit();
         
-    // If not correct, show the error message near the form.
+            // If not correct, show the error message near the form.
             } else {
                 $errorMsg = "Wrong username or password.";
     }
