@@ -32,6 +32,12 @@
              $json = file_get_contents("books.json");
              $books = json_decode($json, true);
 
+             if (isset($_COOKIE['favorites'])) {
+                $favorites = explode(",", $_COOKIE["favorites"]);
+                } else {
+                    $favorites = [];
+                }
+
              $genreLookup = array (
                 'adventure' => 'Adventure',
                 'classic' => 'Classic Literature',
@@ -52,34 +58,61 @@
                     <?php
                     foreach ($books as $book) {
                         if ($book['genre'] === $genreLookup[$_GET['genre']]) {
-                            $title = $book["title"];
-                        $author = $book["author"];
-                        $publishing_year = $book["publishing_year"];
-                        $description = $book["description"]; ?>
-                        <section class="book">
-                <a class="bookmark fa fa-star-o" href="setfavorite.php?id=1"></a>
-                <h3><?php print $title; ?></h3>
-                <p class="publishing-info">
-                    <span class="author"><?php print $author; ?></span>,
-                    <span class="year"><?php print $publishing_year; ?></span>
-                </p>
-                <p class="description">
-                    <?php print $description; ?>
-                </p>
-            </section>
-
-                <?php }}
-                        
-                    
-                } else { ?>
-                    <h2>All Books</h2> <?php
-                    foreach ($books as $book) {
+                        $id = $book['id'];
                         $title = $book["title"];
                         $author = $book["author"];
                         $publishing_year = $book["publishing_year"];
                         $description = $book["description"]; ?>
                         <section class="book">
-                <a class="bookmark fa fa-star-o" href="setfavorite.php?id=1"></a>
+                        <a class= 
+                        <?php
+                // You also need to check the cookies to figure out if the book is favorite or not and display correct symbol.
+                
+                // If the book is in the favorite list, add the class "fa-star" to the a tag with "bookmark" class.
+                // If not, add the class "fa-star-o". These are Font Awesome classes that add a filled star and a star outline respectively.
+                if (in_array($id, $favorites)) {
+                    ?>"bookmark fa fa-star"
+                    <?php
+                } else {
+                    ?>"bookmark fa fa-star-o"
+                    <?php
+                }
+                ?> href=<?php print "setfavorite.php?id=$id"; ?>></a>
+                        <h3><?php print $title; ?></h3>
+                        <p class="publishing-info">
+                        <span class="author"><?php print $author; ?></span>,
+                        <span class="year"><?php print $publishing_year; ?></span>
+                        </p>
+                        <p class="description">
+                        <?php print $description; ?>
+                        </p>
+                        </section>
+                                
+                <?php }}
+ 
+                } else { ?>
+                    <h2>All Books</h2> <?php
+                    foreach ($books as $book) {
+                        $id = $book['id'];
+                        $title = $book["title"];
+                        $author = $book["author"];
+                        $publishing_year = $book["publishing_year"];
+                        $description = $book["description"]; ?>
+                        <section class="book">
+                <a class= 
+                <?php
+                // You also need to check the cookies to figure out if the book is favorite or not and display correct symbol.
+                
+                // If the book is in the favorite list, add the class "fa-star" to the a tag with "bookmark" class.
+                // If not, add the class "fa-star-o". These are Font Awesome classes that add a filled star and a star outline respectively.
+                if (in_array($id, $favorites)) {
+                    ?>"bookmark fa fa-star"
+                    <?php
+                } else {
+                    ?>"bookmark fa fa-star-o"
+                    <?php
+                }
+                ?> href=<?php print "setfavorite.php?id=$id"; ?>></a>
                 <h3><?php print $title; ?></h3>
                 <p class="publishing-info">
                     <span class="author"><?php print $author; ?></span>,
@@ -92,9 +125,7 @@
 
                 <?php }} 
                 
-                // You also need to check the cookies to figure out if the book is favorite or not and display correct symbol.
-                // If the book is in the favorite list, add the class "fa-star" to the a tag with "bookmark" class.
-                // If not, add the class "fa-star-o". These are Font Awesome classes that add a filled star and a star outline respectively.
+                
                 // Also, make sure to set the id parameter for each book, so the setfavorite.php page gets the information which book to favorite/unfavorite.
 
                
