@@ -112,6 +112,7 @@
                     ?>"bookmark fa fa-star-o"
                     <?php
                 }
+                // Also, make sure to set the id parameter for each book, so the setfavorite.php page gets the information which book to favorite/unfavorite.
                 ?> href=<?php print "setfavorite.php?id=$id"; ?>></a>
                 <h3><?php print $title; ?></h3>
                 <p class="publishing-info">
@@ -124,12 +125,7 @@
             </section>
 
                 <?php }} 
-                
-                
-                // Also, make sure to set the id parameter for each book, so the setfavorite.php page gets the information which book to favorite/unfavorite.
-
-               
-            ?>
+                ?>
             
         </main>
     </div>    

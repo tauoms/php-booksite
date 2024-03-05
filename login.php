@@ -1,10 +1,34 @@
 <?php
+    session_start();
+    $errorMsg = "";
+
     // Check if the GET parameter "logout" is set. If so, log the user out.
+    if (isset($_GET['logout'])) {
+        session_unset();
+        session_destroy();
+    }
 
     // Check if the user is already logged in. If so, redirect to admin.php.
+    if(isset($_SESSION["login"]) && $_SESSION["login"] == "OK") {
+        header("Location: login.php");
+        exit;
+    }
 
     // Check if the form has been sent. If so, check the username and password and if correct, log the user in and redirect to admin.php.
+
+    if (isset($_POST['username']) AND isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        if ($username === "nimda" AND $password === "salasana") {
+            $_SESSION['login'] = "OK";
+            header("Location: admin.php");
+            exit();
+        
     // If not correct, show the error message near the form.
+            } else {
+                $errorMsg = "Wrong username or password.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +59,7 @@
             </ul>
         </nav>
         <main>
+            <p><?php print $errorMsg ?></p>
             <form action="login.php" method="post">
                 <p>
                     <label for="username">Username:</label>
