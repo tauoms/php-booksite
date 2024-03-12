@@ -19,6 +19,9 @@
     }
     
     if (!empty($_POST['bookid']) AND !empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['year']) AND !empty($_POST['genre']) AND !empty($_POST['description'])) {
+        // In order to protect against cross-site scripting attacks (i.e. basic PHP security), remove HTML tags from all input.
+    // There's a function for that. E.g.
+    // $title = strip_tags($_POST["title"]);
         $id = strip_tags($_POST['bookid']);
         $title = strip_tags($_POST['title']);
         $author = strip_tags($_POST['author']);
@@ -35,17 +38,14 @@
 
         $message = "Book edited!";
 
-    } elseif (empty($_POST['bookid']) OR empty($_POST['title']) OR empty($_POST['author']) OR empty($_POST['year']) OR empty($_POST['genre']) OR empty($_POST['description'])) {
+        // Once you have added the new book to the variable $books write it into the file.
+    file_put_contents("books.json", json_encode($books));
+
+    } elseif (isset($_POST['edit-book']) AND (empty($_POST['bookid']) OR empty($_POST['title']) OR empty($_POST['author']) OR empty($_POST['year']) OR empty($_POST['genre']) OR empty($_POST['description']))) {
         $message = "Please fill in all fields.";
     }
-    // In order to protect against cross-site scripting attacks (i.e. basic PHP security), remove HTML tags from all input.
-    // There's a function for that. E.g.
-    // $title = strip_tags($_POST["title"]);
 
-
-
-    // Once you have added the new book to the variable $books write it into the file.
-    file_put_contents("books.json", json_encode($books));
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +111,7 @@
                     <label for="description">Description:</label><br>
                     <textarea rows="5" cols="100" id="description" name="description"><?php print $books[$index]['description'] ?></textarea>
                 </p>
-                <p><input type="submit" name="add-book" value="Edit Book"></p>
+                <p><input type="submit" name="edit-book" value="Edit Book"></p>
             </form>
             <p class="message"><?php print $message ?></p>
         </main>
