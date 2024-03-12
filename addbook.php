@@ -13,13 +13,21 @@
 
     // if the form has been sent, add the book to the data file
     if (isset($_POST['year'])) {
-        $id = $_POST['id'];
-        $author = $_POST['author'];
-        $year = $_POST['year'];
-        $genre = $_POST['genre'];
-        $description = $_POST['desription'];
+        $id = strip_tags($_POST['bookid']);
+        $title = strip_tags($_POST['title']);
+        $author = strip_tags($_POST['author']);
+        $year = strip_tags($_POST['year']);
+        $genre = strip_tags($_POST['genre']);
+        $description = strip_tags($_POST['description']);
 
-        $newBook = [$id, $title, $author, $year, $genre];
+        $newBook = (object) [
+            "id" => $id, 
+            "title" => $title, 
+            "author" => $author, 
+            "publishing_year" => $year, 
+            "genre" => $genre,
+            "description" => $description];
+
         $books[] = $newBook;
     }
     // In order to protect against cross-site scripting attacks (i.e. basic PHP security), remove HTML tags from all input.
