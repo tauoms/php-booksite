@@ -32,7 +32,7 @@
         $books[] = $newBook;
 
         $message = "Book added!";
-    } else {
+    } elseif (empty($_POST['bookid']) OR empty($_POST['title']) OR empty($_POST['author']) OR empty($_POST['year']) OR empty($_POST['genre']) OR empty($_POST['description'])) {
         $message = "Please fill in all fields.";
     }
     // In order to protect against cross-site scripting attacks (i.e. basic PHP security), remove HTML tags from all input.

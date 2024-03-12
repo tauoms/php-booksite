@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #e4ecf0;
+  background-color: #c6cfd2;
   font-family: "Rubik", sans-serif;
   color: #3d4a4b;
 }
@@ -28,11 +28,7 @@ a:hover {
 
 header {
   background-color: #808d9a;
-  background: linear-gradient(
-    0deg,
-    rgba(68, 106, 167, 1) 0%,
-    rgba(178, 203, 203, 1) 100%
-  );
+  background: linear-gradient(0deg, #446aa7 0%, #b2cbcb 100%);
   color: #1f1f1f;
   padding: 60px;
   text-align: center;
