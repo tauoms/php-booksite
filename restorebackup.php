@@ -13,9 +13,10 @@
         $json = file_get_contents("booksbackup.json");
         $books = json_decode($json, true);
         $_SESSION["restoremessage"] = "Backup restored!";
+
+        file_put_contents("books.json", json_encode($books));
     }
 
     // Redirect back to admin.php.
     header("Location:" . $_SERVER["HTTP_REFERER"]);
 
-    file_put_contents("books.json", json_encode($books));
