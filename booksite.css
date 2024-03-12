@@ -41,7 +41,7 @@ header {
 
 header h1 {
   font-size: 50px;
-  color: #3d4a4b;
+  color: #35454c;
 }
 
 #main-navi {
@@ -76,7 +76,7 @@ main h2 {
 }
 
 .book {
-  background-color: #ebe9e5;
+  background-color: #ebeef0;
   border: 1px solid #808d9a;
   border-radius: 10px;
   padding: 20px;
@@ -148,4 +148,8 @@ input[name="restorebackup"] {
   padding: 10px;
   font-size: large;
   font-weight: 600;
+}
+
+.restoremessage {
+  font-size: x-small;
 }
