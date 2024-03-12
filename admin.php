@@ -35,6 +35,10 @@
         </nav>
         <main>
             <h2>All Books</h2>
+            <form class="restorebackup" action="restorebackup.php" method="post">
+                    <input type="submit" name="restorebackup" value="Restore Backup">
+                    </form>
+                    <br>
             <?php
                 // This is almost identical to booksite.php (minus the genres). Make sure to print the correct id to the delete form.
                 foreach ($books as $book) {
