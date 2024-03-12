@@ -16,8 +16,8 @@
     if (isset($_POST['bookid'])) {
         $id = $_POST['bookid'];
         $index = array_search($id, array_column($books, 'id'));
-        // array_splice($books, $index, 1);
     }
+    
     if (!empty($_POST['bookid']) AND !empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['year']) AND !empty($_POST['genre']) AND !empty($_POST['description'])) {
         $id = strip_tags($_POST['bookid']);
         $title = strip_tags($_POST['title']);
@@ -35,7 +35,7 @@
 
         $message = "Book edited!";
 
-    } else {
+    } elseif (empty($_POST['bookid']) OR empty($_POST['title']) OR empty($_POST['author']) OR empty($_POST['year']) OR empty($_POST['genre']) OR empty($_POST['description'])) {
         $message = "Please fill in all fields.";
     }
     // In order to protect against cross-site scripting attacks (i.e. basic PHP security), remove HTML tags from all input.
@@ -55,11 +55,14 @@
     <title>Your Favorite Books</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="booksite.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
         <header>
-            <h1>Your Favorite Books</h1>
+        <h1>PHP Booksite</h1>
         </header>
         <nav id="main-navi">
         <ul>
