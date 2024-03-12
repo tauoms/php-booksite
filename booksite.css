@@ -1,6 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #f8f9fa;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e4ecf0;
+  font-family: "Rubik", sans-serif;
+  color: #3d4a4b;
 }
 
 a {
@@ -8,22 +15,42 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #a5b5c6;
+}
+
 #container {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  border: 2px solid #808d9a;
+  /* border: 2px solid #808d9a; */
 }
 
 header {
   background-color: #808d9a;
-  padding: 20px;
+  background: linear-gradient(
+    0deg,
+    rgba(68, 106, 167, 1) 0%,
+    rgba(178, 203, 203, 1) 100%
+  );
+  color: #1f1f1f;
+  padding: 60px;
   text-align: center;
-  font-style: italic;
+  border: 1px solid #808d9a;
+}
+
+header h1 {
+  font-size: 50px;
+  color: #3d4a4b;
 }
 
 #main-navi {
-  border-bottom: 2px solid #808d9a;
+  background-color: #ebeef0;
+  border: 1px solid #808d9a;
+  border-top: none;
+  padding: 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 #main-navi ul {
@@ -41,14 +68,19 @@ header {
 
 main {
   padding: 20px;
-  padding-top: 5px;
+  padding-top: 20px;
+}
+
+main h2 {
+  margin-bottom: 20px;
 }
 
 .book {
+  background-color: #ebe9e5;
   border: 1px solid #808d9a;
-  padding: 10px;
-  padding-bottom: 0px;
-  margin-bottom: 5px;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
 }
 
 .book h3 {
@@ -57,7 +89,7 @@ main {
 }
 
 .bookmark {
-  color: #ffd700;
+  color: #e8c708;
   text-decoration: none;
   font-size: 2rem;
   float: right;
@@ -65,14 +97,55 @@ main {
 
 .publishing-info {
   color: #808d9a;
-  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 label {
   display: inline-block;
-  width: 100px;
+  width: 80px;
 }
 
 .deleteform {
   float: right;
+}
+
+.editform {
+  float: right;
+}
+
+.credentials {
+  color: #696868;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+input {
+  padding: 3px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  border: 1px solid #808d9a;
+}
+
+input[type="submit"] {
+  padding: 6px;
+  margin-right: 6px;
+}
+
+select {
+  padding: 4px;
+  border-radius: 8px;
+}
+
+input[name="deletebook"] {
+  background-color: #ee8282;
+}
+
+input[name="restorebackup"] {
+  background-color: #a4e89d;
+}
+
+.message {
+  padding: 10px;
+  font-size: large;
+  font-weight: 600;
 }

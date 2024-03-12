@@ -38,15 +38,21 @@
     <title>Your Favorite Books</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="booksite.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
         <header>
-            <h1>Your Favorite Books</h1>
+        <h1>PHP Booksite</h1>
         </header>
         <nav id="main-navi">
             <ul>
                 <li><a href="booksite.php">Home</a></li>
+                <li><a href="login.php">Login</a></li>
+                </ul><ul>
+
                 <li><a href="booksite.php?category=adventure">Adventure</a></li>
                 <li><a href="booksite.php?category=classic">Classic Literature</a></li>
                 <li><a href="booksite.php?category=coming-of-age">Coming-of-age</a></li>
@@ -71,6 +77,9 @@
                 </p>
                 <p><input type="submit" name="login" value="Log in"></p>
             </form>
+            <p class="credentials">Credentials for demo use<br>
+                username: nimda<br>
+                password: salasana</p>
         </main>
     </div>    
 </body>

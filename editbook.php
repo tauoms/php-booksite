@@ -10,9 +10,14 @@
     // Read the file into array variable $books:
     $json = file_get_contents("books.json");
     $books = json_decode($json, true);
+    $index = '';
     $message = '';
 
-    // if the form has been sent, add the book to the data file
+    if (isset($_POST['bookid'])) {
+        $id = $_POST['bookid'];
+        $index = array_search($id, array_column($books, 'id'));
+        // array_splice($books, $index, 1);
+    }
     if (!empty($_POST['bookid']) AND !empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['year']) AND !empty($_POST['genre']) AND !empty($_POST['description'])) {
         $id = strip_tags($_POST['bookid']);
         $title = strip_tags($_POST['title']);
@@ -21,17 +26,15 @@
         $genre = strip_tags($_POST['genre']);
         $description = strip_tags($_POST['description']);
 
-        $newBook = (object) [
-            "id" => $id, 
-            "title" => $title, 
-            "author" => $author, 
-            "publishing_year" => $year, 
-            "genre" => $genre,
-            "description" => $description];
+        $books[$index]['id'] = $id;
+        $books[$index]['title'] = $title;
+        $books[$index]['author'] = $author;
+        $books[$index]['year'] = $year;
+        $books[$index]['genre'] = $genre;
+        $books[$index]['description'] = $description;
 
-        $books[] = $newBook;
+        $message = "Book edited!";
 
-        $message = "Book added!";
     } else {
         $message = "Please fill in all fields.";
     }
@@ -66,27 +69,29 @@
             </ul>
         </nav>
         <main>
-            <h2>Add a New Book</h2>
-            <form action="addbook.php" method="post">
+            <h2>Edit Book</h2>
+            <form action="editbook.php" method="post">
                 <p>
                     <label for="bookid">ID:</label>
-                    <input type="number" id="bookid" name="bookid">
+                    <input type="number" id="bookid" name="bookid" value="<?php print $books[$index]['id'] ?>" >
                 </p>
                 <p>
                     <label for="title">Title:</label>
-                    <input type="text" id="title" name="title">
+                    <input type="text" id="title" name="title" value="<?php print $books[$index]['title'] ?>" >
                 </p>
                 <p>
                     <label for="author">Author:</label>
-                    <input type="text" id="author" name="author">
+                    <input type="text" id="author" name="author" value="<?php print $books[$index]['author'] ?>" >
                 </p>
                 <p>
                     <label for="year">Year:</label>
-                    <input type="number" id="year" name="year">
+                    <input type="number" id="year" name="year" value="<?php print $books[$index]['publishing_year'] ?>" >
                 </p>
                 <p>
                     <label for="genre">Genre:</label>
+                    <?php $default_state = $books[$index]['genre'];?>
                     <select id="genre" name="genre">
+    <option value='<?php echo $default_state?>' selected='selected'><?php echo $default_state?></option>
                         <option value="Adventure">Adventure</option>
                         <option value="Classic Literature">Classic Literature</option>
                         <option value="Coming-of-age">Coming-of-age</option>
@@ -101,9 +106,9 @@
                 <br>
                 <p>
                     <label for="description">Description:</label><br>
-                    <textarea rows="5" cols="100" id="description" name="description"></textarea>
+                    <textarea rows="5" cols="100" id="description" name="description"><?php print $books[$index]['description'] ?></textarea>
                 </p>
-                <p><input type="submit" name="add-book" value="Add Book"></p>
+                <p><input type="submit" name="add-book" value="Edit Book"></p>
             </form>
             <p class="message"><?php print $message ?></p>
         </main>

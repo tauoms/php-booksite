@@ -15,9 +15,13 @@
     // Check the POST parameter "bookid". If it's set, delete the corresponding book from the data file.
     if (isset($_POST['bookid'])) {
         $id = $_POST['bookid'];
-        $index = array_search($id, $books);
+        $index = array_search($id, array_column($books, 'id'));
+        // error_log("indeksi: $index");
         array_splice($books, $index, 1);
     }
+
+    //loop foreach (books as index => book)
+
     // Hint: array_diff will not work here, since you'd need to create the whole book "object". Find the index and use array_splice instead.
 
     // Redirect back to admin.php.
